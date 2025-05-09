@@ -11,16 +11,16 @@
         <div class="heading">Event List</div>
         <div id="event-list" class="event-list card">
             <div class="card-section navigationBtns-section">
-                <button class="event-btn btn">Event</button>
-                <button class="calendar-btn btn">Calendar</button>
+                <button class="event-btn btn" id="event-btn">Event</button>
+                <button class="calendar-btn btn" id="calendar-btn" >Calendar</button>
             </div>
-            <div class="card-section weeksEvents-section">
-                <div class="weeksEvents-heading">Events within the next 7 Days</div>
-                <div class="weeksEvents-list"></div>
+            <div class="card-section weekEvents-section">
+                <div class="weekEvents-heading">Events within the next 7 Days</div>
+                <div class="weekEvents-list"></div>
             </div>
             <div class="card-section input-section">
                 <div class="inps">
-                    <div class="inp-box event-inp">
+                    <div class="inp-box title-inp">
                         <label for="addATitle">Title:</label>
                         <input type="text" name="addATitle" required>
                     </div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="btns">
-                    <button id="add-Event">Add Event</button>
+                    <button id="add-Event" onclick="addEvent()">Add Event</button>
                     <button id="clear-Event">Clear Event</button>
                 </div>
                 
@@ -50,15 +50,20 @@
                     <button>View</button>
                 </div>
             </div>
-            <div class="card-section list-section">
+            <div class="card-section eventList-section">
                 <table>
+                    <thead>
                         <tr>
-                        <th>Date</th>
-                        <th>Locations</th>
-                        <th>Event</th>
-                        <th>Attendees</th>
-                        <th></th>
-                    </tr>
+                            <th>Date</th>
+                            <th>Locations</th>
+                            <th>Event</th>
+                            <th>Attendees</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
                 </table>
             </div>
         </div>

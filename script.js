@@ -11,6 +11,31 @@ const addEventBtn = document.querySelector("#add-event")
 const clearEventBtn = document.querySelector("#clear-event")
 
 // list container variables
-const weeksEventList  = document.querySelector(".weeksEvents-list")
-const eventListTable = document.querySelector(".eventList-section table")
+const weekEventList  = document.querySelector(".weekEvents-list")
+const eventListTable = document.querySelector(".eventList-section table tbody")
 
+// Functions
+    // renderPage : Renders the page's origin state
+    const renderPage = ()=>{
+        
+    }
+
+    // addEvent : Adds Events from the input fields to the event list
+    const addEvent = ()=>{
+
+    }
+
+    // deleteEvent : Deletes Events from the event list
+    const deleteEvent = ()=>{
+
+    }
+
+    // showWeekEvents : Shows all the events within a week
+    const showWeekEvents  = ()=>{
+
+    }
+
+    // showMostAttendees : Shows the event with the most attendees
+    const showMostAttendees = ()=>{
+
+    }

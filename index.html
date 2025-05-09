@@ -8,7 +8,62 @@
 </head>
 <body>
     <main >
-        
+        <div class="heading">Event List</div>
+        <div id="event-list" class="event-list card">
+            <div class="card-section navigationBtns-section">
+                <button class="event-btn btn">Event</button>
+                <button class="calendar-btn btn">Calendar</button>
+            </div>
+            <div class="card-section weeksEvents-section">
+                <div class="weeksEvents-heading">Events within the next 7 Days</div>
+                <div class="weeksEvents-list"></div>
+            </div>
+            <div class="card-section input-section">
+                <div class="inps">
+                    <div class="inp-box event-inp">
+                        <label for="addATitle">Title:</label>
+                        <input type="text" name="addATitle" required>
+                    </div>
+                    <div class="inp-box date-inp">
+                        <label for="addADate">Date:</label>
+                        <input type="date" name="addADate" required>
+                    </div>
+                    <div class="inp-box location-inp">
+                        <label for="addALocation">Location:</label>
+                        <input type="text" name="addALocation" required>
+                    </div>
+                    <div class="inp-box attendees-inp">
+                        <label for="addAnAttendee">Attendees:</label>
+                        <input type="number" name="addAAttendee"required>
+                    </div>
+                </div>
+                <div class="btns">
+                    <button id="add-Event">Add Event</button>
+                    <button id="clear-Event">Clear Event</button>
+                </div>
+                
+                
+            </div>
+            <div class="card-section mostAttendees-section">
+                <div class="mostAttendees-heading">Event with the most attendees</div>
+                <div class="mostAttendees-btn">
+                    <button>View</button>
+                </div>
+            </div>
+            <div class="card-section list-section">
+                <table>
+                        <tr>
+                        <th>Date</th>
+                        <th>Locations</th>
+                        <th>Event</th>
+                        <th>Attendees</th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </main>
+    <script src="script.js"></script>
+
 </body>
 </html>

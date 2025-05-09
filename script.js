@@ -18,14 +18,27 @@ const weekEvents = []
 // Functions
     // renderPage : Renders the page's origin state
     const renderPage = ()=>{
+
         eventListTable.innerHTML = events.map(event=>event).join("")
         weekEvents.innerHTML = weekEvents.map(event=>event).join("")
+        
     }
+
+    
 
     // addEvent : Adds Events from the input fields to the event list
     const addEvent = ()=>{
-        
-        
+        const newTableRow  = `
+            <tr>
+                <td>${dateInp.value}</td>
+                <td>${locationInp.value}</td>
+                <td>${titleInp.value}</td>
+                <td>${attendeesInp.value}</td>
+                <td><button class="btn" onclick="deleteEvent()">Delete</button></td>    
+            </tr>
+        `;
+        events.push(newTableRow);
+        updateEventCookies()        
     }
 
     // deleteEvent : Deletes Events from the event list
@@ -42,5 +55,14 @@ const weekEvents = []
     const showMostAttendees = ()=>{
 
     }
+    /* // updateEventCookies: Updates cookies of the eventsList
+    const updateEventCookies = ()=>{
 
+        renderPage()
+    }
+
+    // updateWeekEventCookies: Updates cookies of the eventsList
+    const updateWeekEventCookies = ()=>{
+
+    } */
     renderPage()

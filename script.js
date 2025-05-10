@@ -7,8 +7,8 @@ const attendeesInp = document.querySelector(".attendees-inp input");
 // Btn variables
 const eventBtn = document.querySelector("#event-btn");
 const calendarBtn = document.querySelector("#calendar-btn");
-const addEventBtn = document.querySelector("#add-event")
-const clearEventBtn = document.querySelector("#clear-event")
+const addEventBtn = document.querySelector("#add-Event")
+const clearEventBtn = document.querySelector("#clear-Event")
 
 // list container variables
 const eventListTable = document.querySelector(".eventList-section table tbody")
@@ -38,7 +38,13 @@ const weekEvents = []
             </tr>
         `;
         events.push(newTableRow);
-        updateEventCookies()        
+        renderPage()
+    }
+    const clearEvent = ()=>{
+        titleInp.value = null 
+        dateInp.value = null 
+        locationInp.value = null 
+        attendeesInp.value = null 
     }
 
     // deleteEvent : Deletes Events from the event list
@@ -65,4 +71,7 @@ const weekEvents = []
     const updateWeekEventCookies = ()=>{
 
     } */
+
+    addEventBtn.addEventListener("click", addEvent);
+    clearEventBtn.addEventListener("click", clearEvent);
     renderPage()

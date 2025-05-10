@@ -9,25 +9,42 @@ const eventBtn = document.querySelector("#event-btn");
 const calendarBtn = document.querySelector("#calendar-btn");
 const addEventBtn = document.querySelector("#add-Event");
 const clearEventBtn = document.querySelector("#clear-Event");
+const showMostAttendeesBtn = document.querySelector(".mostAttendees-btn button")
 
 // list container variables
 const eventListTable = document.querySelector(".eventList-section table tbody");
 const weekEventsList = document.querySelector(".weekEvents-list");
 const events = [];
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const monthNames = {
+    full:[
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      short:[
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ]
+}
 let weekEvents;
 
 // Functions
@@ -64,7 +81,8 @@ const addEvent = () => {
     !dateInp.value ||
     !locationInp.value ||
     !titleInp.value ||
-    !attendeesInp.value
+    !attendeesInp.value||
+    attendeesInp.value < 1
   ) {
     return alert("All event field should be filled in");
   }
@@ -112,7 +130,22 @@ const showWeekEvents = () => {
 };
 
 // showMostAttendees : Shows the event with the most attendees
-const showMostAttendees = () => {};
+const showMostAttendees = () => {
+    let eventCount = 0
+    let eventIndex;
+    events.forEach((event, index)=>{
+        if(event.attendees>eventCount){
+            eventCount = event.attendees;
+            eventIndex = [index];
+            
+        }
+        else if(event.attendees === eventCount){
+            eventIndex.push(index)
+        }
+
+    })
+    alert(`${eventIndex.map(i=>events[i].title).join("\n")}`)
+};
 /* // updateEventCookies: Updates cookies of the eventsList
     const updateEventCookies = ()=>{
 
@@ -126,4 +159,6 @@ const showMostAttendees = () => {};
 
 addEventBtn.addEventListener("click", addEvent);
 clearEventBtn.addEventListener("click", clearEvent);
+showMostAttendeesBtn.addEventListener("click", showMostAttendees);
+
 renderPage();

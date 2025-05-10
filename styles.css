@@ -58,21 +58,6 @@ body {
     background-color: #0056b3;
 }
 
-.event-btn{
-    border-radius: 20px 0 0 20px;
-}
-.calendar-btn{
-    border-radius: 0px 20px 20px 0px;
-}
-.calendar-btn:hover, .event-btn:has(+.calendar-btn:not(:hover)){
-    opacity: 100%;
-    transition: 1s;
-}
-.event-btn:has(+.calendar-btn:hover), .calendar-btn{
-    opacity: 80%;
-    transition: 1s;
-}
-
 /* Events list */
 .weeksEvents-heading,
 .mostAttendees-heading {
@@ -120,7 +105,7 @@ body {
 }
 
 .btns button:hover {
-    background-color: #1c632c;
+    background-color: #218838;
 }
 
 #clear-Event {
@@ -128,7 +113,7 @@ body {
 }
 
 #clear-Event:hover {
-    background-color: #8c2a34;
+    background-color: #c82333;
 }
 
 /* Event view button */
@@ -151,10 +136,53 @@ body {
     }
 
     .btns {
-        flex-direction: row;
-        justify-content: center;
+        flex-direction: column;
     }
-    .heading{
-        text-align: center;
-    }
+}
+
+.eventList-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.eventList-section th,
+.eventList-section td {
+  border: none;
+  padding: 8px;
+  text-align: center;
+}
+
+.eventList-section th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.eventList-section tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.eventList-section tr:hover {
+  background-color: #e9ecef;
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .input-section .inps {
+    flex-direction: column;
+  }
+  .card-section{
+    width: 90;
+  }
+
+  .inp-box {
+    flex: 1 1 100%;
+  }
+
+  .btns {
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+
+  
 }

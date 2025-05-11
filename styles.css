@@ -13,6 +13,7 @@ body {
     display: flex;
     justify-content: center;
     padding: 2rem;
+    position: relative;
 }
 
 /* Heading */
@@ -185,4 +186,43 @@ body {
   }
 
   
+}
+
+.messageModal{
+    place-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 0%;
+    left: 0%;
+    background-color: #000000a9;
+    display: grid;
+}
+.modal-content{
+    display: grid;
+    place-content: center;
+    position: relative;
+    width: 500px;
+    height: 150px;
+    background-color: #fff;
+    border-radius: 30px;
+    text-align: center;
+}
+.modal-content svg {
+    fill: #4b4b4b;
+    width: 20px;
+    position: absolute;
+    top: 6%;
+    right: 5%;
+    cursor: pointer;
+}
+@media only screen and (max-width:600px){
+    .modal-content{
+        width: 400px;
+        height: 175px;
+    }
+    .modal-content svg{
+        width: 15px;
+    }
 }

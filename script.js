@@ -10,6 +10,7 @@ const calendarBtn = document.querySelector("#calendar-btn");
 const addEventBtn = document.querySelector("#add-Event");
 const clearEventBtn = document.querySelector("#clear-Event");
 const showMostAttendeesBtn = document.querySelector(".mostAttendees-btn button")
+const closeModalBtn = document.querySelector("#close-btn")
 
 // list container variables
 const eventListTable = document.querySelector(".eventList-section table tbody");
@@ -79,18 +80,26 @@ const renderPage = () => {
         `<p>${event.title}, at ${event.location}, on ${event.date} (in ${event.daysAway}day${event.daysAway === 1? "":"s"})</p>`
     )
     .join("\n");
+    closeModal()
 };
 
 // addEvent : Adds Events from the input fields to the event list
 const addEvent = () => {
-  if (
-    !dateInp.value ||
-    !locationInp.value ||
-    !titleInp.value ||
-    !attendeesInp.value||
-    attendeesInp.value < 1
-  ) {
-    return alert("All event field should be filled in");
+  if(!dateInp.value){
+    return messageModal("When is the Event? You'd need to input a Date to save an event ")
+  } 
+  else if(!locationInp.value){
+    return messageModal("Where is it located? You'd need to input a Location to save an event ")
+
+  } 
+  else if(!titleInp.value){
+    return messageModal("What Event is it? You'd need to input a Title to save an event")
+  } 
+  else if(!attendeesInp.value){
+    return messageModal("How many people are attending the event? You'd need to input the number of Attendees to save an event")
+  }
+  else if(attendeesInp.value < 1){
+    return messageModal()
   }
   const newEvent = {
     date: dateInp.value,
@@ -101,6 +110,7 @@ const addEvent = () => {
 
   events.push(newEvent);
   renderPage();
+  clearEvent();
 };
 const clearEvent = () => {
   titleInp.value = null;
@@ -166,7 +176,7 @@ const showMostAttendees = () => {
         }
 
     })
-    alert(`${eventIndex.map(i=>events[i].title).join("\n")}`)
+    messageModal(`${eventIndex.map(i=>events[i].title).join("\n")}`)
 };
     // setCookie : Creates a cookie
     function setCookie (name,value){
@@ -189,10 +199,25 @@ const showMostAttendees = () => {
         return cookieVal
         
     }
-
-addEventBtn.addEventListener("click", addEvent);
-clearEventBtn.addEventListener("click", clearEvent);
-showMostAttendeesBtn.addEventListener("click", showMostAttendees);
+    //messageModal: prompts a message modal instead of messageModals 
+    function messageModal(msg){
+      document.querySelector(".content-text").innerText = msg
+      document.querySelector(".messageModal").style.display = "grid"
+    }
+    //closeModal: closes the modal 
+    function closeModal(){
+      document.querySelector(".content-text").innerText =""
+      document.querySelector(".messageModal").style.display = "none"
+    }
+    addEventBtn.addEventListener("click", addEvent);
+    clearEventBtn.addEventListener("click", clearEvent);
+    showMostAttendeesBtn.addEventListener("click", showMostAttendees);
+    closeModalBtn.addEventListener("click",closeModal)
+    window.onclick = event=>{
+      if(event.target === document.querySelector(".messageModal")){
+          closeModal()
+      }
+    }
 
 
 renderPage()

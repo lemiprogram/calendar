@@ -54,18 +54,17 @@ getCookie("events") === null?setCookie("events","[]"): "";
 let events = JSON.parse(getCookie("events"));
 let weekEvents; 
 // renderPage : Renders the page's origin state
-const renderPage = (newRender = false) => {
+const renderPage = () => {
     setCookie("events",JSON.stringify(events))
-    console.log(getCookie("events"))
     showWeekEvents();
     eventListTable.innerHTML = events
     .map(
         (event) => `
             <tr>
-                <td>${event.date}</td>      
-                <td>${event.location}</td>      
-                <td>${event.title}</td>      
-                <td>${event.attendees}</td>      
+                <td class="item">${event.date}</td>      
+                <td class="item">${event.location}</td>      
+                <td class="item">${event.title}</td>      
+                <td class="item">${event.attendees}</td>      
                 <td>
                     <button class="btn"onclick="deleteEvent(this)">Delete</button>
                 </td>
@@ -112,7 +111,19 @@ const clearEvent = () => {
 
 // deleteEvent : Deletes Events from the event list
 const deleteEvent = (event) => {
-    
+    const deletedElement = event.parentElement.parentElement
+    deletedElement.remove();
+    const tableRows = eventListTable.querySelectorAll("tr");
+    events = Array.from(tableRows).map(row=>{
+      const [date, location, title, attendees] = row.querySelectorAll(".item")
+      return {
+        date: date.innerText,
+        location: location.innerText,
+        title: title.innerText,
+        attendees: attendees.innerText,
+      }
+    })
+    renderPage();
 };
 
 // showWeekEvents : Shows all the events within a week
@@ -137,7 +148,7 @@ const showWeekEvents = () => {
       });
     }
   });
-  weekEvents = arr
+  weekEvents = arr;
 };
 
 // showMostAttendees : Shows the event with the most attendees
@@ -184,7 +195,5 @@ clearEventBtn.addEventListener("click", clearEvent);
 showMostAttendeesBtn.addEventListener("click", showMostAttendees);
 
 
-setCookie("delta", "fiction")
-setCookie("bravo", "trix")
-console.log(getCookie("delta"))
-renderPage(1);
+renderPage()
+console.log()

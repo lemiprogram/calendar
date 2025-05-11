@@ -14,7 +14,7 @@ const showMostAttendeesBtn = document.querySelector(".mostAttendees-btn button")
 // list container variables
 const eventListTable = document.querySelector(".eventList-section table tbody");
 const weekEventsList = document.querySelector(".weekEvents-list");
-const events = [];
+
 const monthNames = {
     full:[
         "January",
@@ -45,15 +45,22 @@ const monthNames = {
         "Dec",
       ]
 }
-let weekEvents;
+
+// Constant variables
+const DAYS_TO_MILISECONDS = 24*3600*1000;
 
 // Functions
+getCookie("events") === null?setCookie("events","[]"): "";
+let events = JSON.parse(getCookie("events"));
+let weekEvents; 
 // renderPage : Renders the page's origin state
-const renderPage = () => {
-  showWeekEvents();
-  eventListTable.innerHTML = events
+const renderPage = (newRender = false) => {
+    setCookie("events",JSON.stringify(events))
+    console.log(getCookie("events"))
+    showWeekEvents();
+    eventListTable.innerHTML = events
     .map(
-      (event) => `
+        (event) => `
             <tr>
                 <td>${event.date}</td>      
                 <td>${event.location}</td>      
@@ -67,9 +74,9 @@ const renderPage = () => {
     )
     .join("");
 
-  weekEventsList.innerHTML = weekEvents
+    weekEventsList.innerHTML = weekEvents
     .map(
-      (event) =>
+        (event) =>
         `<p>${event.title}, at ${event.location}, on ${event.date} (in ${event.daysAway}day${event.daysAway === 1? "":"s"})</p>`
     )
     .join("\n");
@@ -104,29 +111,33 @@ const clearEvent = () => {
 };
 
 // deleteEvent : Deletes Events from the event list
-const deleteEvent = (event) => {};
+const deleteEvent = (event) => {
+    
+};
 
 // showWeekEvents : Shows all the events within a week
 const showWeekEvents = () => {
   const daysFromNow = (date) => {
     const today = new Date();
     return Math.ceil(
-      (date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+      (date.getTime() - today.getTime()) / (DAYS_TO_MILISECONDS)
     ); // (get the difference in time from today to the set date in miliseconds)/(convert it to days)
   };
-  weekEvents = events.map((event) => {
+  const arr = [];
+  events.forEach((event) => {
     const eventDate = new Date(event.date);
     const daysAway = daysFromNow(eventDate);
-    return daysAway < 0 || daysAway > 7
-      ? null
-      : {
-          title: event.title,
-          date: event.date,
-          location: event.location,
-          attendees: event.attendees,
-          daysAway: daysAway,
-        };
+    if(daysAway >= 0 && daysAway <= 7){
+      arr.push({
+        title: event.title,
+        date: event.date, 
+        location: event.location,
+        attendees: event.attendees,
+        daysAway: daysAway,
+      });
+    }
   });
+  weekEvents = arr
 };
 
 // showMostAttendees : Shows the event with the most attendees
@@ -146,19 +157,34 @@ const showMostAttendees = () => {
     })
     alert(`${eventIndex.map(i=>events[i].title).join("\n")}`)
 };
-/* // updateEventCookies: Updates cookies of the eventsList
-    const updateEventCookies = ()=>{
-
+    // setCookie : Creates a cookie
+    function setCookie (name,value){
+        const date = new Date();
+        date.setTime(date.getTime + (3000*DAYS_TO_MILISECONDS));
+        const expiresIn = `expires=${date.toUTCString()}`
+        document.cookie = `${name}=${value}; ${expiresIn}; path=/`
+    }
+    
+    //getCookie: Gets a cookie
+    function getCookie(name){
+        const cDecoded = decodeURIComponent(document.cookie)
+        const cookieKeyVals = cDecoded.split("; ")
+        let cookieVal = null;
+        cookieKeyVals.forEach((cookieKeyVal)=>{
+            if(cookieKeyVal.startsWith(`${name}=`)){
+                cookieVal = cookieKeyVal.substring(name.length + 1)
+            }
+        })
+        return cookieVal
         
     }
-
-    // updateWeekEventCookies: Updates cookies of the eventsList
-    const updateWeekEventCookies = ()=>{
-
-    } */
 
 addEventBtn.addEventListener("click", addEvent);
 clearEventBtn.addEventListener("click", clearEvent);
 showMostAttendeesBtn.addEventListener("click", showMostAttendees);
 
-renderPage();
+
+setCookie("delta", "fiction")
+setCookie("bravo", "trix")
+console.log(getCookie("delta"))
+renderPage(1);

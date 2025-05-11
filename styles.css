@@ -38,12 +38,6 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Navigation buttons */
-.navigationBtns-section {
-    display: flex;
-    justify-content: end;
-    margin-bottom: 1rem;
-}
 
 .btn {
     padding: 0.6rem 1.2rem;
@@ -204,10 +198,11 @@ body {
     place-content: center;
     position: relative;
     width: 500px;
-    height: 150px;
+    min-height: 150px;
     background-color: #fff;
     border-radius: 30px;
     text-align: center;
+    padding-bottom: 20px;
 }
 .modal-content svg {
     fill: #4b4b4b;
@@ -216,6 +211,13 @@ body {
     top: 6%;
     right: 5%;
     cursor: pointer;
+}
+.content-heading{
+    font-weight: 700;
+    font-size: 1.8em;
+}
+.content-text{
+    font-size: 1.2em;
 }
 @media only screen and (max-width:600px){
     .modal-content{
